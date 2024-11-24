@@ -1,0 +1,13 @@
+# ScrapyHeli
+
+This is a Python script that scrapes data from the Automobile.tn website. It uses the `requests` and `BeautifulSoup` libraries to fetch and parse HTML content.
+
+## Installation
+
+To run this script, you'll need to have Python installed on your machine. You can then install the required libraries by running:
+
+`pip3 install requirements.txt`
+
+## Running
+
+`python3.12 automobile_scrapy.py`
