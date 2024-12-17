@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import logging
-from typing import List, Optional
+from typing import List, Dict, Optional
 from itertools import zip_longest
 
 logging.basicConfig(level=logging.INFO)
@@ -165,6 +165,13 @@ class AutoMobileScraper:
         # inialise with None to avoid index out of range
         spec_values = [None] * 100
         spec_values_elmnts = soup.select("div#specs.technical-details td")
+        specs_dict = dict()
+        new_specs = soup.select("tr")
+        print("attrs ", new_specs[1].td.text)
+        for tr in new_specs:
+            if tr.attrs["td"]:
+                specs_dict[tr.attrs["td"].text.strip()] = tr.attrs["td"].text.strip()
+        print(specs_dict)
         for i in range(len(spec_values_elmnts)):
             spec_values[i] = spec_values_elmnts[i]
         # try:
@@ -225,7 +232,7 @@ def main():
     logger.info(f"Found {len(constructors)} constructors")
 
     # testing awel model
-    for constructor in constructors:
+    for constructor in constructors[:2]:
         logger.info(f"Processing constructor: {constructor}")
         # Get technical file links for this constructor
         technical_files = scraper.get_technical_file_links(constructor)
